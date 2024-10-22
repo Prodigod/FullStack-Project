@@ -40,4 +40,4 @@ export const {
   useGetFacultyMemberQuery,
   useAddFacultyMemberMutation,
   useDeleteFacultyMemberMutation,
-} = departmentsApi;
+} = facultyApi;
