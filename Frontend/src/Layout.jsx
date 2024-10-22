@@ -7,9 +7,9 @@ export default function Layout() {
         <nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/Faculty"> Faculty</NavLink>
-          <NavLink to="/Departments"> Faculty</NavLink>
-          <NavLink to="/Register"> Faculty</NavLink>
-          <NavLink to="/Login"> Faculty</NavLink>
+          <NavLink to="/Departments"> Departments</NavLink>
+          <NavLink to="/Register"> Register</NavLink>
+          <NavLink to="/Login"> Login</NavLink>
         </nav>
       </header>
       <main>

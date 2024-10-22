@@ -5,8 +5,8 @@ import FacultyList from "./Faculty/FacultyList";
 import FacultyDetails from "./Faculty/FacultyDetails";
 import FacultyForm from "./Faculty/FacultyForm";
 
-import DepartmentList from "./Department/FacultyList";
-import DepartmentDetails from "./Department/FacultyDetails";
+import DepartmentList from "./Department/DepartmentList";
+import DepartmentDetails from "./Department/DepartmentDetails";
 import DepartmentForm from "./Department/DepartmentForm";
 
 
