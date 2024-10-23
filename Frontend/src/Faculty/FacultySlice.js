@@ -9,7 +9,7 @@ const facultyApi = api.injectEndpoints({
       providesTags: ["Faculty"],
     }),
     getFacultyMember: build.query({
-      query: (id) => "/Faculty/" + id,
+      query: (id) => "/Faculty" + id,
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
       providesTags: ["Faculty"],
@@ -26,7 +26,7 @@ const facultyApi = api.injectEndpoints({
     }),
     deleteFacultyMember: build.mutation({
       query: (id) => ({
-        url: "/departments/" + id,
+        url: "/Faculty" + id,
         method: "DELETE",
       }),
       transformErrorResponse: (response) => response.data.error,
