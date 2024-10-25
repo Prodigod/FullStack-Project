@@ -4,14 +4,12 @@ const departmentsApi = api.injectEndpoints({
   endpoints: (build) => ({
     getDepartments: build.query({
       query: () => "/departments",
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
-      providesTags: ["Departments"],
+      transformErrorResponse: (response) => response.data,
+      providesTags: ["Department"],
     }),
     getDepartment: build.query({
       query: (id) => "/departments/" + id,
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
+      transformErrorResponse: (response) => response.data,
       providesTags: ["Department"],
     }),
     addDepartment: build.mutation({
@@ -20,16 +18,30 @@ const departmentsApi = api.injectEndpoints({
         method: "POST",
         body: department,
       }),
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
+      transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Department"],
+    }),
+    updateDepartment: build.mutation({
+      query: ({id, token}) => ({
+        url: `departments/${id}`,
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: ({ name, bio, contactInfo, Id }),
+      }),
       invalidatesTags: ["Department"],
     }),
     deleteDepartment: build.mutation({
-      query: (id) => ({
+      query: ({id, token}) => ({
         url: "/departments/" + id,
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }),
-      transformErrorResponse: (response) => response.data.error,
+      transformErrorResponse: (response) => response.data,
       invalidatesTags: ["Department"],
     }),
   }),
@@ -39,5 +51,6 @@ export const {
   useGetDepartmentsQuery,
   useGetDepartmentQuery,
   useAddDepartmentMutation,
+  useUpdateDepartmentMutation,
   useDeleteDepartmentMutation,
 } = departmentsApi;

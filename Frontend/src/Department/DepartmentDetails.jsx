@@ -5,20 +5,21 @@ import {
 } from "./DepartmentSlice";
 
 export default function DepartmentDetails() {
-  const { departmentId } = useParams();
+  const { Id } = useParams();
   const {
     data: department,
     isLoading,
     error,
-  } = useGetDepartmentQuery(departmentId);
+  } = useGetDepartmentQuery(Id, { skip: !Id });
 
   const navigate = useNavigate();
 
   const [deleteDepartment] = useDeleteDepartmentMutation();
   async function removeDepartment() {
     try {
-      await deleteDepartment(department.id);
-      navigate("/");
+      const token = localStorage.getItem('authToken');
+      await deleteDepartment({id: Id, token});
+      navigate("/departments");
     } catch (e) {
       console.error(e);
     }
@@ -33,8 +34,8 @@ export default function DepartmentDetails() {
       <h1>
         {department.name} #{department.id}
       </h1>
-      <p>{party.description}</p>
-      <p>{party.contactInfo}</p>
+      <p>{department.description}</p>
+      <p>{department.contactInfo}</p>
       <button onClick={removeDepartment}>Delete Department</button>
     </>
   );

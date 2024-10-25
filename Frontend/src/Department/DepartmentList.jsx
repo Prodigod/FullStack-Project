@@ -3,22 +3,27 @@ import { Link } from "react-router-dom";
 import { useGetDepartmentsQuery } from "./DepartmentSlice";
 
 export default function DepartmentList() {
-  const { data: departments = [] } = useGetDepartmentsQuery();
-
+  const { data, error, isLoading } = useGetDepartmentsQuery();
+  
+  if (isLoading) return <p>Loading departments...</p>;
+  if (error) return <p>{error.message}</p>;
+  
   return (
     <>
       <h1>List of Departments:</h1>
+      {data ? (
       <ul>
-        {departments.map((d) => (
+        {data.map((d) => (
           <li key={d.id}>
-            <h2>
-              {d.name} #{d.id}
-            </h2>
-            <p>{d.description}</p>
-            <Link to={`/departments/${d.id}`}>See details</Link>
+            <Link to={`/departments/${d.id}`}>
+            <h3>{d.name}</h3>
+            </Link>
           </li>
         ))}
       </ul>
+      ) : (
+        <p>No departments available.</p>
+      )}
     </>
   );
 }

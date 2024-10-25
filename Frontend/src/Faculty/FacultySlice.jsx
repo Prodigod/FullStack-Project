@@ -4,40 +4,53 @@ const facultyApi = api.injectEndpoints({
   endpoints: (build) => ({
     getFaculty: build.query({
       query: () => "/faculties",
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
-      providesTags: ["Faculties"],
+      transformErrorResponse: (response) => response.data,
+      providesTags: ["Faculty"],
     }),
     getFacultyMember: build.query({
-      query: (id) => "/faculties" + id,
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
+      query: (id) => "/faculties/" + id,
+      transformErrorResponse: (response) => response.data,
       providesTags: ["Faculty"],
     }),
     addFacultyMember: build.mutation({
-      query: (professor) => ({
+      query: (id) => ({
         url: "/faculties",
         method: "POST",
-        body: professor,
+        body: JSON.stringify({ name, bio, email, contactInfo }),
       }),
-      transformResponse: (response) => response.data,
-      transformErrorResponse: (response) => response.data.error,
-      invalidatesTags: ["faculty"],
+      transformErrorResponse: (response) => response.data,
+      invalidatesTags: ["Faculty"],
     }),
+    updateFacultyMember: build.mutation({
+        query: ({id, token}) => ({
+          url: `faculties/${id}`,
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ name, bio, contactInfo, departmentId }),
+        }),
+        invalidatesTags: ["Faculty"],
+      }),
+    
     deleteFacultyMember: build.mutation({
-      query: (id) => ({
+      query: ({id, token}) => ({
         url: "/faculties/" + id,
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }),
-      transformErrorResponse: (response) => response.data.error,
+      transformErrorResponse: (response) => response.data,
       invalidatesTags: ["Faculty"],
     }),
   }),
 });
-
 export const {
   useGetFacultyQuery,
   useGetFacultyMemberQuery,
+  useUpdateFacultyMemberQuery,
   useAddFacultyMemberMutation,
   useDeleteFacultyMemberMutation,
 } = facultyApi;

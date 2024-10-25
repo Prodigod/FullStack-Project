@@ -5,20 +5,21 @@ import {
 } from "./FacultySlice";
 
 export default function FacultyDetails() {
-  const { facultyId } = useParams();
+  const { Id } = useParams();
   const {
     data: faculty,
     isLoading,
     error,
-  } = useGetFacultyMemberQuery(facultyId);
+  } = useGetFacultyMemberQuery(Id, { skip: !Id });
 
   const navigate = useNavigate();
 
   const [deleteFacultyMember] = useDeleteFacultyMemberMutation();
   async function removeFacultyMember() {
     try {
-      await deleteFacultyMember(faculty.id);
-      navigate("/");
+      const token = localStorage.getItem('authToken');
+      await deleteFacultyMember({id: Id, token});
+      navigate("/faculty");
     } catch (e) {
       console.error(e);
     }
@@ -34,8 +35,9 @@ export default function FacultyDetails() {
         {faculty.name} #{faculty.id}
       </h1>
       <p>{faculty.bio}</p>
-      <p>{party.contactInfo}</p>
+      <p>{faculty.contactInfo}</p>
       <p>{faculty.email}</p>
+      <p>{faculty.departmentId}</p>
       <button onClick={removeFacultyMember}>Delete Faculty Member</button>
     </>
   );

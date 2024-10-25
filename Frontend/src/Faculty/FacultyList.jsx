@@ -1,23 +1,31 @@
 import { Link } from "react-router-dom";
 
-import { useGetFacultyQuery } from ".FacultySlice";
+import { useGetFacultyQuery } from "./FacultySlice";
+
+
 
 export default function FacultyList() {
-  const { data: faculty = [] } = useGetFacultyQuery();
+  const { data, error, isLoading } = useGetFacultyQuery();
+  
+  if (isLoading) return <p>Loading faculty members...</p>;
+  if (error) return <p>{error.message}</p>;
+
   return (
     <>
-      <h1>List of Faculty Members:</h1>
-      <ul>
-        {faculty.map((f) => (
-          <li key={f.id}>
-            <h2>
-              {f.name} #{f.id}
-            </h2>
-            <p>{f.description}</p>
-            <Link to={`/faculties/${f.id}`}>See more</Link>
-          </li>
-        ))}
-      </ul>
+      {data ? (
+        <ul>
+          {data.map((f) => (
+            <li key={f.id}>
+              <Link to={`/Faculty/${f.id}`}>
+                <h3>{f.name}</h3>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No faculty members loaded</p>
+      )}
     </>
   );
 }
+  
