@@ -3,13 +3,13 @@ import api from "../store/api";
 const departmentsApi = api.injectEndpoints({
   endpoints: (build) => ({
     getDepartments: build.query({
-      query: () => "/Departments",
+      query: () => "/departments",
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
-      providesTags: ["Department"],
+      providesTags: ["Departments"],
     }),
     getDepartment: build.query({
-      query: (id) => "/Departments/" + id,
+      query: (id) => "/departments/" + id,
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
       providesTags: ["Department"],

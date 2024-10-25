@@ -21,7 +21,7 @@ export default function FacultyForm() {
         ...formData,
         date: isoDate,
       }).unwrap();
-      navigate(`/Faculty/${faculty.id}`);
+      navigate(`/Faculties/${faculty.id}`);
     } catch (e) {
       console.error(e);
     }

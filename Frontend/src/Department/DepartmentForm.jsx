@@ -20,7 +20,7 @@ export default function DepartmentForm() {
         ...formData,
         date: isoDate,
       }).unwrap();
-      navigate(`/Departments/${department.id}`);
+      navigate(`/departments/${department.id}`);
     } catch (e) {
       console.error(e);
     }

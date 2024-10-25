@@ -14,7 +14,7 @@ export default function FacultyList() {
               {f.name} #{f.id}
             </h2>
             <p>{f.description}</p>
-            <Link to={`/faculty/${f.id}`}>See more</Link>
+            <Link to={`/faculties/${f.id}`}>See more</Link>
           </li>
         ))}
       </ul>

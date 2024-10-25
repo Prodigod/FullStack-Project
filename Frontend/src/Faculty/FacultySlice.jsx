@@ -3,30 +3,30 @@ import api from "../store/api";
 const facultyApi = api.injectEndpoints({
   endpoints: (build) => ({
     getFaculty: build.query({
-      query: () => "/Faculty",
+      query: () => "/faculties",
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
-      providesTags: ["Faculty"],
+      providesTags: ["Faculties"],
     }),
     getFacultyMember: build.query({
-      query: (id) => "/Faculty" + id,
+      query: (id) => "/faculties" + id,
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
       providesTags: ["Faculty"],
     }),
     addFacultyMember: build.mutation({
       query: (professor) => ({
-        url: "/Faculty",
+        url: "/faculties",
         method: "POST",
         body: professor,
       }),
       transformResponse: (response) => response.data,
       transformErrorResponse: (response) => response.data.error,
-      invalidatesTags: ["Faculty"],
+      invalidatesTags: ["faculty"],
     }),
     deleteFacultyMember: build.mutation({
       query: (id) => ({
-        url: "/Faculty" + id,
+        url: "/faculties/" + id,
         method: "DELETE",
       }),
       transformErrorResponse: (response) => response.data.error,
