@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <DepartmentDetails />,
       },
       {
-        path: "Department/New",
+        path: "Departments/New",
         element: <DepartmentForm />,
       },
       {

@@ -14,9 +14,9 @@ const facultyApi = api.injectEndpoints({
     }),
     addFacultyMember: build.mutation({
       query: (id) => ({
-        url: "/faculties",
+        url: "/faculties/",
         method: "POST",
-        body: JSON.stringify({ name, bio, email, contactInfo }),
+        body: ({ name, bio, email, contactInfo }),
       }),
       transformErrorResponse: (response) => response.data,
       invalidatesTags: ["Faculty"],
@@ -29,7 +29,7 @@ const facultyApi = api.injectEndpoints({
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({ name, bio, contactInfo, departmentId }),
+          body:({ name, bio, contactInfo, departmentId }),
         }),
         invalidatesTags: ["Faculty"],
       }),

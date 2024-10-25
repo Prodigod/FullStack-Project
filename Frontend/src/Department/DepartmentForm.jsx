@@ -12,20 +12,18 @@ export default function DepartmentForm() {
   const navigate = useNavigate();
   const [addDepartment] = useAddDepartmentMutation();
   async function postDepartment(event) {
+    const token = localStorage.getItem('authToken');
     event.preventDefault();
 
    
     try {
-      const department = await addDepartment({
-        ...formData,
-        date: isoDate,
-      }).unwrap();
+      const department = await addDepartment({...formData, token})
       navigate(`/departments/${department.id}`);
     } catch (e) {
       console.error(e);
     }
   }
-
+  
   return (
     <form onSubmit={postDepartment}>
       <h2>Add a Department</h2>

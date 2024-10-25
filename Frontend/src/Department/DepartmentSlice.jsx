@@ -13,10 +13,14 @@ const departmentsApi = api.injectEndpoints({
       providesTags: ["Department"],
     }),
     addDepartment: build.mutation({
-      query: (department) => ({
+      query: (name, description, contactInfo, token) => ({
         url: "/departments",
         method: "POST",
-        body: department,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: ({name, description, contactInfo, token})
       }),
       transformErrorResponse: (response) => response.data,
       invalidatesTags: ["Department"],
@@ -29,7 +33,7 @@ const departmentsApi = api.injectEndpoints({
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: ({ name, bio, contactInfo, Id }),
+        body: ({ name, bio, contactInfo, id, token}),
       }),
       invalidatesTags: ["Department"],
     }),

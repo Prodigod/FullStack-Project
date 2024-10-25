@@ -4,7 +4,7 @@ import { useGetDepartmentsQuery } from "./DepartmentSlice";
 
 export default function DepartmentList() {
   const { data, error, isLoading } = useGetDepartmentsQuery();
-  
+  const token = localStorage.getItem('authToken');
   if (isLoading) return <p>Loading departments...</p>;
   if (error) return <p>{error.message}</p>;
   
@@ -24,6 +24,12 @@ export default function DepartmentList() {
       ) : (
         <p>No departments available.</p>
       )}
+     
+     {token ? (
+        <Link to="/departments/new">
+          <button>Add a new department</button>
+        </Link>
+      ) : null}
     </>
   );
 }
