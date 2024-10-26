@@ -25,11 +25,11 @@ export default function DepartmentList() {
         <p>No departments available.</p>
       )}
      
-     {token ? (
+     { (
         <Link to="/departments/new">
           <button>Add a new department</button>
         </Link>
-      ) : null}
+      ) }
     </>
   );
 }

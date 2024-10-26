@@ -11,19 +11,27 @@ export default function DepartmentForm() {
 
   const navigate = useNavigate();
   const [addDepartment] = useAddDepartmentMutation();
+  
   async function postDepartment(event) {
     const token = localStorage.getItem('authToken');
     event.preventDefault();
 
-   
     try {
-      const department = await addDepartment({...formData, token})
-      navigate(`/departments/${department.id}`);
+      const department = await addDepartment(formData, token);
+      // navigate(`/departments/${department.id}`);
     } catch (e) {
       console.error(e);
     }
   }
   
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <form onSubmit={postDepartment}>
       <h2>Add a Department</h2>
@@ -33,7 +41,7 @@ export default function DepartmentForm() {
           type="text"
           name="name"
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -42,9 +50,7 @@ export default function DepartmentForm() {
           type="text"
           name="description"
           value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
+          onChange={handleChange}
         />
       </label>
       <label>
@@ -53,12 +59,10 @@ export default function DepartmentForm() {
           type="text"
           name="contactInfo"
           value={formData.contactInfo}
-          onChange={(e) =>
-            setFormData({ ...formData, contactInfo: e.target.value })
-          }
+          onChange={handleChange}
         />
       </label>
-      <button>Add Department</button>
+      <button type="submit">Add Department</button>
     </form>
   );
 }
