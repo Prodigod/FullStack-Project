@@ -38,7 +38,9 @@ export default function FacultyDetails() {
       <p>{faculty.contactInfo}</p>
       <p>{faculty.email}</p>
       <p>{faculty.departmentId}</p>
+      {token&& (
       <button onClick={removeFacultyMember}>Delete Faculty Member</button>
+      )}
     </>
   );
 }

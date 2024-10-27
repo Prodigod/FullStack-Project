@@ -28,7 +28,7 @@ export default function DepartmentDetails() {
   if (isLoading) return <p>Loading departments...</p>;
 
   if (error) return <p>{error.message}</p>;
-
+  
   return (
     <>
       <h1>
@@ -36,7 +36,9 @@ export default function DepartmentDetails() {
       </h1>
       <p>{department.description}</p>
       <p>{department.contactInfo}</p>
+      {token&& (
       <button onClick={removeDepartment}>Delete Department</button>
+      )}
     </>
   );
 }

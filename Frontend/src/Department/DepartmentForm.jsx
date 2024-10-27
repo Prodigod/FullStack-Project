@@ -18,7 +18,6 @@ export default function DepartmentForm() {
 
     try {
       const department = await addDepartment(formData, token);
-      // navigate(`/departments/${department.id}`);
     } catch (e) {
       console.error(e);
     }
