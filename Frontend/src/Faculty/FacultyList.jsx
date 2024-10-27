@@ -6,7 +6,7 @@ import { useGetFacultyQuery } from "./FacultySlice";
 
 export default function FacultyList() {
   const { data, error, isLoading } = useGetFacultyQuery();
-  
+  const token = localStorage.getItem('authToken');
   if (isLoading) return <p>Loading faculty members...</p>;
   if (error) return <p>{error.message}</p>;
 
@@ -26,8 +26,8 @@ export default function FacultyList() {
         <p>No faculty members loaded</p>
       )}
       {token&& (
-      <Link to="/faculties/new">
-      <button>Add a new faculty member.</button></Link>
+      <Link to="/faculty/new">
+      <button>Add a new faculty member</button></Link>
       )}
     </>
   );
