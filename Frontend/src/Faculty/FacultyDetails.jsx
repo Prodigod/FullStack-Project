@@ -15,9 +15,9 @@ export default function FacultyDetails() {
   const navigate = useNavigate();
 
   const [deleteFacultyMember] = useDeleteFacultyMemberMutation();
+  const token = localStorage.getItem('authToken');
   async function removeFacultyMember() {
     try {
-      const token = localStorage.getItem('authToken');
       await deleteFacultyMember({id: Id, token});
       navigate("/faculty");
     } catch (e) {

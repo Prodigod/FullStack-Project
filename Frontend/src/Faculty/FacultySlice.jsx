@@ -20,13 +20,13 @@ const facultyApi = api.injectEndpoints({
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
+        body: {
           name,
           bio,
           email,
           contactInfo,
           departmentId,
-        }),
+        },
       }),
       transformErrorResponse: (response) => response.data,
       invalidatesTags: ["Faculty"],

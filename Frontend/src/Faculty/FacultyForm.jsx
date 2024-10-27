@@ -14,10 +14,10 @@ export default function FacultyForm() {
   const navigate = useNavigate();
   const [addFacultyMember] = useAddFacultyMemberMutation();
   const [error, setError] = useState(null); 
-
+  const token = localStorage.getItem("authToken");
   async function postFacultyMember(event) {
     event.preventDefault();
-    const token = localStorage.getItem("authToken");
+    
 
     if (!token) {
       setError("Authentication token is missing. Please log in.");

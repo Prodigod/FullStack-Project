@@ -15,7 +15,7 @@ export default function DepartmentForm() {
   async function postDepartment(event) {
     const token = localStorage.getItem('authToken');
     event.preventDefault();
-
+    navigate("/departments");
     try {
       const department = await addDepartment(formData, token);
     } catch (e) {

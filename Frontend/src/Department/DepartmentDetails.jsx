@@ -13,11 +13,10 @@ export default function DepartmentDetails() {
   } = useGetDepartmentQuery(Id, { skip: !Id });
 
   const navigate = useNavigate();
-
+  const token = localStorage.getItem('authToken');
   const [deleteDepartment] = useDeleteDepartmentMutation();
   async function removeDepartment() {
     try {
-      const token = localStorage.getItem('authToken');
       await deleteDepartment({id: Id, token});
       navigate("/departments");
     } catch (e) {
